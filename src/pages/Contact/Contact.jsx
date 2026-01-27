@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
 
 function Contact() {
   return (
     <div>
+      <Navbar />
       <h1>Contact Page</h1>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/about">About</Link>
-      </nav>
     </div>
   );
 }
