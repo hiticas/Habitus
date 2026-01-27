@@ -11,6 +11,7 @@ function App() {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
+      // const response = await fetch('/api/workouts');
       const response = await fetch('https://habitus-be.vercel.app/api/workouts');
       const data = await response.json();
 
