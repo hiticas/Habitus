@@ -20,7 +20,7 @@ function App() {
       }
     }
     fetchWorkouts();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="app">
