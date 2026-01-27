@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const WorkoutForm = () => {
   const [title, setTitle] = useState('');
   const [load, setLoad] = useState('');
@@ -9,7 +11,7 @@ const WorkoutForm = () => {
 
     const workout = { title, load, reps };
 
-    const response = await fetch('/api/workouts', {
+    const response = await fetch('https://habitus-be.vercel.app/api/workouts', {
       method: 'POST',
       body: JSON.stringify(workout),
       headers: {
@@ -57,6 +59,7 @@ const WorkoutForm = () => {
         value={reps}
       />
       <button>Add Workout</button>
+      {error && <div className="error">{error}</div>}
     </form>
   );
 }

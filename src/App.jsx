@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './App.scss'
 import Navbar from './components/Navbar/Navbar'
 import WorkoutDetails from './components/WorkoutDetails/WorkoutDetails';
+import WorkoutForm from './components/WorkoutsForm/WorkoutsForm';
 
 function App() {
   const [workouts, setWorkouts] = useState(null);
@@ -25,7 +26,7 @@ function App() {
       <div>{workouts && workouts.map(workout => (
         <WorkoutDetails key={workout._id} workout={workout} />
       ))}</div>
-      
+      <WorkoutForm />
     </div>
   )
 }
