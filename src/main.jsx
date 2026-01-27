@@ -5,9 +5,10 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import App from './App.jsx';
-import './index.scss';
 import About from './pages/About/About.jsx';
 import Contact from './pages/Contact/Contact.jsx';
+import { WorkoutsContextProvider } from './context/WorkoutContext.jsx';
+import './index.scss';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <WorkoutsContextProvider>
+      <RouterProvider router={router} />
+    </WorkoutsContextProvider>
   </React.StrictMode>
 );

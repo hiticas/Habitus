@@ -1,12 +1,13 @@
-import React, { useState, useEffect, use } from 'react'
-import { Link } from 'react-router-dom'
-import './App.scss'
+import { useState, useEffect } from 'react'
+import { useWorkoutsContext } from './hooks/useWorkoutsContext';
+
 import Navbar from './components/Navbar/Navbar'
 import WorkoutDetails from './components/WorkoutDetails/WorkoutDetails';
 import WorkoutForm from './components/WorkoutsForm/WorkoutsForm';
+import './App.scss'
 
 function App() {
-  const [workouts, setWorkouts] = useState(null);
+  const { workouts, dispatch } = useWorkoutsContext();
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -14,7 +15,7 @@ function App() {
       const data = await response.json();
 
       if (response.ok) {
-        setWorkouts(data);
+        dispatch({ type: 'SET_WORKOUTS', payload: data });
       }
     }
     fetchWorkouts();
@@ -23,10 +24,16 @@ function App() {
   return (
     <div className="app">
       <Navbar />
-      <div>{workouts && workouts.map(workout => (
-        <WorkoutDetails key={workout._id} workout={workout} />
-      ))}</div>
-      <WorkoutForm />
+      <div className="main">
+        <div className="workout-details">
+          {workouts && workouts.map(workout => (
+            <WorkoutDetails key={workout._id} workout={workout} />
+          ))}
+        </div>
+        <div className="workout-form-wrapper">
+          <WorkoutForm />
+        </div>
+      </div>
     </div>
   )
 }

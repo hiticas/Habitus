@@ -1,3 +1,5 @@
+import './WorkoutDetails.scss';
+
 const WorkoutDetails = ({ workout }) => {
   return (
     <div className="container">
