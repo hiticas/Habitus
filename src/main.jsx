@@ -7,6 +7,7 @@ import {
 import App from './App.jsx';
 import About from './pages/About/About.jsx';
 import Contact from './pages/Contact/Contact.jsx';
+import Workout from './pages/Workout/Workout.jsx';
 import { WorkoutsContextProvider } from './context/WorkoutContext.jsx';
 import './index.scss';
 
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+  },
+  {
+    path: '/workout',
+    element: <Workout />,
   },
   {
     path: '/about',

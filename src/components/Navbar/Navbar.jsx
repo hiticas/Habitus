@@ -5,6 +5,7 @@ const Navbar = () => {
   return (
     <header className="navbar">
         <Link to="/">Home</Link>
+        <Link to="/workout">Workouts</Link>
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
     </header>
