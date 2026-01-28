@@ -15,7 +15,7 @@ const Navbar = () => {
     <header className="navbar">
         {user && <div>
           <span>{user.email}</span>
-          <Link to="/">Home</Link>
+          <Link to="/home">Home</Link>
           <Link to="/workout">Workouts</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
