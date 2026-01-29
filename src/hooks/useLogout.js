@@ -1,5 +1,5 @@
 import { useAuthContext } from "./useAuthContext"
-import useWorkoutsContext from "./useWorkoutsContext"
+import { cuseWorkoutsContext } from "./useWorkoutsContext"
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext()
