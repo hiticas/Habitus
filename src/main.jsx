@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import App from './App.jsx';
+import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import About from './pages/About/About.jsx';
 import Contact from './pages/Contact/Contact.jsx';
 import Workouts from './pages/Workouts/Workouts.jsx';
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <App />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
       </ProtectedRoute>
     ),
   },

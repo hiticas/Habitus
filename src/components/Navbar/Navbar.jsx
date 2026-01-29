@@ -19,6 +19,7 @@ const Navbar = () => {
         {user && <div>
           <span>{user.email}</span>
           <Link to="/home">Home</Link>
+          <Link to="/dashboard">Dashboard</Link>
           <Link to="/workouts">Workouts</Link>
           <Link to="/habits">Habits</Link>
           <Link to="/about">About</Link>
