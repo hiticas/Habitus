@@ -1,4 +1,5 @@
 import { useWorkoutsContext } from '../../hooks/useWorkoutsContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import './WorkoutDetails.scss';
 
 // date fns
@@ -6,10 +7,18 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   const handleClick = async () => {
+    if (!user) {
+      return;
+    }
+
     const response = await fetch('https://habitus-be.vercel.app/api/workouts/' + workout._id, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
     });
 
     const data = await response.json();

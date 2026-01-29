@@ -1,26 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useWorkoutsContext } from '../../hooks/useWorkoutsContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 import Navbar from '../../components/Navbar/Navbar'
 import WorkoutDetails from '../../components/WorkoutDetails/WorkoutDetails';
 import WorkoutForm from '../../components/WorkoutsForm/WorkoutsForm';
-import './Workout.scss'
+import './Workouts.scss'
 
-function Workout() {
+function Workouts() {
   const { workouts, dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      // const response = await fetch('/api/workouts');
-      const response = await fetch('https://habitus-be.vercel.app/api/workouts');
+      const response = await fetch('https://habitus-be.vercel.app/api/workouts', {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const data = await response.json();
 
       if (response.ok) {
         dispatch({ type: 'SET_WORKOUTS', payload: data });
       }
     }
-    fetchWorkouts();
-  }, [dispatch]);
+
+    if (user) {
+      fetchWorkouts();
+    }
+  }, [dispatch, user]);
 
   return (
     <div className="app">
@@ -39,4 +47,4 @@ function Workout() {
   )
 }
 
-export default Workout
+export default Workouts
