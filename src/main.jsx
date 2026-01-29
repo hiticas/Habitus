@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate
 } from 'react-router-dom';
+
 import App from './App.jsx';
 import About from './pages/About/About.jsx';
 import Contact from './pages/Contact/Contact.jsx';
 import Workouts from './pages/Workouts/Workouts.jsx';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute.jsx';
+import { PublicRoute } from './components/PublicRoute/PublicRoute.jsx';
 import { WorkoutsContextProvider } from './context/WorkoutContext.jsx';
 import { AuthContextProvider } from './context/AuthContext.jsx';
 import Login from './pages/Login/Login.jsx';
@@ -17,31 +21,55 @@ import './index.scss';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Login />,
+    element: <Navigate to="/login" replace />,
   },
   {
     path: '/home',
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/workouts',
-    element: <Workouts />,
+    element: (
+      <ProtectedRoute>
+        <Workouts />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/about',
-    element: <About />,
+    element: (
+      <ProtectedRoute>
+        <About />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/contact',
-    element: <Contact />,
+    element: (
+      <ProtectedRoute>
+        <Contact />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/login',
-    element: <Login />,
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
   },
   {
     path: '/signup',
-    element: <Signup />,
+    element: (
+      <PublicRoute>
+        <Signup />
+      </PublicRoute>
+    ),
   },
 ]);
 
