@@ -6,7 +6,7 @@ export const habitsReducer = (state, action) => {
   switch (action.type) {
     case 'SET_HABITS':
       return {
-        habits: action.payload
+        habits: Array.isArray(action.payload) ? action.payload : []
       }
     case 'CREATE_HABIT':
     case 'ADD_HABIT':
