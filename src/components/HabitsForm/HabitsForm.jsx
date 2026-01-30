@@ -9,6 +9,8 @@ const HabitForm = () => {
   
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
+  const [color, setColor] = useState('#667eea');
+  const [completed, setCompleted] = useState(false);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
@@ -20,7 +22,7 @@ const HabitForm = () => {
       return;
     }
 
-    const habit = { title, date };
+    const habit = { title, date, color, completed };
 
     const response = await fetch('https://habitus-be.vercel.app/api/habits', {
       method: 'POST',
