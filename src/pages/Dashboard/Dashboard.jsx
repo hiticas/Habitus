@@ -564,36 +564,6 @@ export default function Dashboard() {
             })}
           </div>
 
-          {/* Legend */}
-          <div style={{
-            marginTop: '2rem',
-            display: 'flex',
-            gap: '2rem',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}>
-            {['#667eea', '#4ecdc4', '#ff6b6b', '#f7b731'].map((color, index) => (
-              <div key={color} style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-              }}>
-                <div style={{
-                  width: '12px',
-                  height: '12px',
-                  borderRadius: '3px',
-                  background: color,
-                }}></div>
-                <span style={{
-                  fontSize: '0.875rem',
-                  color: '#888',
-                }}>
-                  {['Meditate', 'Read', 'Exercise', 'Journal'][index]}
-                </span>
-              </div>
-            ))}
-          </div>
-
           {/* Modal */}
           {showModal && (
             <div
