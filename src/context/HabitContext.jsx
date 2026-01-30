@@ -9,12 +9,22 @@ export const habitsReducer = (state, action) => {
         habits: action.payload
       }
     case 'CREATE_HABIT':
+    case 'ADD_HABIT':
       return {
         habits: [action.payload, ...state.habits]
       }
     case 'DELETE_HABIT':
+    case 'REMOVE_HABIT':
       return {
-        habits: state.habits.filter((h) => h._id !== action.payload._id)
+        habits: state.habits.filter((h) => h.id !== action.payload && h._id !== action.payload)
+      }
+    case 'TOGGLE_HABIT':
+      return {
+        habits: state.habits.map((h) => 
+          h.id === action.payload || h._id === action.payload 
+            ? { ...h, completed: !h.completed }
+            : h
+        )
       }
     default:
       return state
@@ -23,7 +33,7 @@ export const habitsReducer = (state, action) => {
 
 export const HabitsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(habitsReducer, {
-    habits: null
+    habits: []
   })
 
   return (

@@ -32,7 +32,8 @@ const HabitDetails = ({ habit }) => {
   return (
     <div className="container">
         <h2>{habit.title}</h2>
-        <p>{formatDistanceToNow(new Date(habit.createdAt), { addSuffix: true })}</p>
+        <h3>To do: {habit.date}</h3>
+        {/* <p>{formatDistanceToNow(new Date(habit.createdAt), { addSuffix: true })}</p> */}
         <span className='btn-delete material-symbols-outlined' onClick={handleClick}>delete</span>
     </div>
   );

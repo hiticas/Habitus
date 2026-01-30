@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Clock } from 'lucide-react';
 import Navbar from '../../components/Navbar/Navbar';
+import { useHabitsContext } from '../../hooks/useHabitsContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Dashboard() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+
+  const { habits, dispatch } = useHabitsContext();
+  const { user } = useAuthContext();
   
   // Habits are now stored by full date string (YYYY-MM-DD) instead of day index
-  const [habits, setHabits] = useState([]);
+  // const [habits, setHabits] = useState([]);
   
   const availableHabits = [
     { name: 'Meditate', color: '#667eea' },
@@ -20,6 +25,27 @@ export default function Dashboard() {
     { name: 'Eat Healthy', color: '#fd79a8' },
     { name: 'No Social Media', color: '#fdcb6e' },
   ];
+
+  useEffect(() => {
+    const fetchHabits = async () => {
+      const response = await fetch('https://habitus-be.vercel.app/api/habits', {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      const data = await response.json();
+      console.log("fetched habits", data);
+        
+      if (response.ok) {
+        // setHabits(data);
+        dispatch({ type: 'SET_HABITS', payload: data });
+      }
+    }
+
+    if (user) {
+      fetchHabits();
+    }
+  }, [user]);
 
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -61,27 +87,72 @@ export default function Dashboard() {
     return `${year}-${month}-${day}`;
   };
   
-  const toggleHabit = (habitId) => {
-    setHabits(habits.map(habit => 
-      habit.id === habitId ? { ...habit, completed: !habit.completed } : habit
-    ));
+  const toggleHabit = async (habitId) => {
+    const habit = habits.find(h => h._id === habitId || h.id === habitId);
+    if (!habit) return;
+    
+    try {
+      const response = await fetch(`https://habitus-be.vercel.app/api/habits/${habit._id || habit.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        },
+        body: JSON.stringify({ completed: !habit.completed })
+      });
+      
+      if (response.ok) {
+        dispatch({ type: 'TOGGLE_HABIT', payload: habit._id || habit.id });
+      }
+    } catch (error) {
+      console.error('Error toggling habit:', error);
+    }
   };
   
-  const addHabit = (habitName, color, date) => {
+  const addHabit = async (habitName, color, date) => {
     const dateStr = formatDate(date);
-    const newHabit = {
-      id: `${habitName.toLowerCase()}-${dateStr}-${Date.now()}`,
-      date: dateStr,
-      title: habitName,
-      color: color,
-      completed: false
-    };
-    setHabits([...habits, newHabit]);
-    setShowModal(false);
+    
+    try {
+      const response = await fetch('https://habitus-be.vercel.app/api/habits', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        },
+        body: JSON.stringify({
+          title: habitName,
+          date: dateStr,
+          color: color,
+          completed: false
+        })
+      });
+      
+      if (response.ok) {
+        const newHabit = await response.json();
+        dispatch({ type: 'ADD_HABIT', payload: newHabit });
+        setShowModal(false);
+        console.log("newHabit", newHabit);
+      }
+    } catch (error) {
+      console.error('Error adding habit:', error);
+    }
   };
   
-  const removeHabit = (habitId) => {
-    setHabits(habits.filter(habit => habit.id !== habitId));
+  const removeHabit = async (habitId) => {
+    try {
+      const response = await fetch(`https://habitus-be.vercel.app/api/habits/${habitId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      
+      if (response.ok) {
+        dispatch({ type: 'REMOVE_HABIT', payload: habitId });
+      }
+    } catch (error) {
+      console.error('Error removing habit:', error);
+    }
   };
   
   const openModal = (date) => {
@@ -341,7 +412,7 @@ export default function Dashboard() {
                     {dayHabits.length > 0 ? (
                       dayHabits.map(habit => (
                         <div
-                          key={habit.id}
+                          key={habit._id || habit.id}
                           className="habit-card"
                           style={{
                             background: habit.completed 
@@ -359,7 +430,7 @@ export default function Dashboard() {
                         >
                           {/* Checkmark Circle */}
                           <div 
-                            onClick={() => toggleHabit(habit.id)}
+                            onClick={() => toggleHabit(habit._id || habit.id)}
                             style={{
                               width: '24px',
                               height: '24px',
@@ -389,7 +460,7 @@ export default function Dashboard() {
                           
                           {/* Habit Title */}
                           <div 
-                            onClick={() => toggleHabit(habit.id)}
+                            onClick={() => toggleHabit(habit._id || habit.id)}
                             style={{
                               fontSize: '0.875rem',
                               fontWeight: '600',
@@ -407,7 +478,7 @@ export default function Dashboard() {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              removeHabit(habit.id);
+                              removeHabit(habit._id || habit.id);
                             }}
                             style={{
                               background: 'rgba(255, 255, 255, 0.05)',

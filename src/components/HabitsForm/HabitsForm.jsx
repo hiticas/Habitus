@@ -8,6 +8,7 @@ const HabitForm = () => {
   const { user } = useAuthContext();
   
   const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
@@ -19,7 +20,7 @@ const HabitForm = () => {
       return;
     }
 
-    const habit = { title };
+    const habit = { title, date };
 
     const response = await fetch('https://habitus-be.vercel.app/api/habits', {
       method: 'POST',
@@ -39,6 +40,7 @@ const HabitForm = () => {
     
     if (response.ok) {
       setTitle('');
+      setDate('');
       setError(null);
       setEmptyFields([]);
       console.log('New habit added:', data);
@@ -51,11 +53,21 @@ const HabitForm = () => {
       <h3>Add a New Habit</h3>
 
       <label>Habit Title:</label>
+      <br/>
       <input
         type="text"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         className={emptyFields?.includes('title') ? 'error' : ''}
+      />
+      <br/>
+      <label>Date:</label>
+      <br/>
+      <input
+        type="text"
+        onChange={(e) => setDate(e.target.value)}
+        value={date}
+        className={emptyFields?.includes('date') ? 'error' : ''}
       />
 
       <button>Add Habit</button>
