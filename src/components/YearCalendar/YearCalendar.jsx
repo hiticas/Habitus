@@ -161,10 +161,10 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
 
               if (record) {
                 if (record.completed) {
-                  background = "#3CB371"; // filled green
+                  background = habit.color; // filled green
                 } else {
                   background = "transparent"; // leave transparent
-                  border = "1px solid #3CB371"; // green border for incomplete
+                  border = `1px solid ${habit.color}`; // green border for incomplete
                 }
               }
 
@@ -190,7 +190,7 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
           </div>
         ))}
       </div>
-      {hoveredDay && (
+      {/* {hoveredDay && (
         <div style={{
           marginTop: "10px",
           padding: "8px",
@@ -202,7 +202,7 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
         }}>
           <strong>{formatDate(hoveredDay)}</strong>
         </div>
-      )}
+      )} */}
     </div>
   );
 
