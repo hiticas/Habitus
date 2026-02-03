@@ -166,7 +166,7 @@ export default function Dashboard() {
       <Navbar />
       <div style={{
         minHeight: 'calc(100vh - 50px)',
-        background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%)',
+        background: 'linear-gradient(135deg, #00e42a88 0%, #03a00088 100%)',
         padding: '3rem 2rem',
         fontFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif',
       }}>
@@ -258,7 +258,7 @@ export default function Dashboard() {
               <h1 style={{
                 fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 fontWeight: '800',
-                color: '#ffffff',
+                color: 'black',
                 margin: '0 0 0.5rem 0',
                 letterSpacing: '-0.02em',
                 lineHeight: '1.1',
@@ -267,7 +267,7 @@ export default function Dashboard() {
               </h1>
               <p style={{
                 fontSize: '1.125rem',
-                color: '#888',
+                color: 'black',
                 margin: 0,
                 fontWeight: '400',
               }}>
@@ -284,7 +284,7 @@ export default function Dashboard() {
                 className="nav-button"
                 onClick={() => navigateWeek(-1)}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  background: 'black',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                   borderRadius: '12px',
                   padding: '0.75rem',
@@ -319,7 +319,7 @@ export default function Dashboard() {
                 className="nav-button"
                 onClick={() => navigateWeek(1)}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  background: 'black',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                   borderRadius: '12px',
                   padding: '0.75rem',
@@ -353,8 +353,8 @@ export default function Dashboard() {
                   className="day-card"
                   style={{
                     background: today 
-                      ? 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%)'
-                      : 'rgba(255, 255, 255, 0.02)',
+                      ? '#008000ad'
+                      : '#cff508',
                     border: today 
                       ? '1px solid rgba(102, 126, 234, 0.3)'
                       : '1px solid rgba(255, 255, 255, 0.08)',
@@ -370,13 +370,13 @@ export default function Dashboard() {
                   {/* Card Header */}
                   <div style={{
                     padding: '1.5rem',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderBottom: '1px solid #0000002b',
                     background: today ? 'rgba(102, 126, 234, 0.05)' : 'rgba(255, 255, 255, 0.02)',
                   }}>
                     <div style={{
                       fontSize: '0.75rem',
                       fontWeight: '600',
-                      color: today ? '#667eea' : '#666',
+                      color: 'black',
                       marginBottom: '0.5rem',
                       textTransform: 'uppercase',
                       letterSpacing: '0.1em',
@@ -386,13 +386,13 @@ export default function Dashboard() {
                     <div style={{
                       fontSize: '2rem',
                       fontWeight: '700',
-                      color: today ? '#667eea' : '#fff',
+                      color: 'black',
                     }}>
                       {date.getDate()}
                     </div>
                     <div style={{
                       fontSize: '0.875rem',
-                      color: '#888',
+                      color: 'black',
                       marginTop: '0.25rem',
                     }}>
                       {date.toLocaleString('default', { month: 'short' })}
@@ -462,7 +462,7 @@ export default function Dashboard() {
                             style={{
                               fontSize: '0.875rem',
                               fontWeight: '600',
-                              color: habit.completed ? habit.color : '#fff',
+                              color: 'black',
                               textDecoration: habit.completed ? 'line-through' : 'none',
                               opacity: habit.completed ? 0.7 : 1,
                               flex: 1,
@@ -512,7 +512,7 @@ export default function Dashboard() {
                       <div style={{
                         padding: '2rem 1rem',
                         textAlign: 'center',
-                        color: '#666',
+                        color: 'black',
                         fontSize: '0.875rem',
                         fontStyle: 'italic',
                       }}>
@@ -524,7 +524,7 @@ export default function Dashboard() {
                   {/* Add Habit Button */}
                   <div style={{
                     padding: '1rem',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                    borderTop: '1px solid #0000002b',
                   }}>
                     <button
                       onClick={() => openModal(date)}
@@ -534,7 +534,7 @@ export default function Dashboard() {
                         border: '1px dashed rgba(255, 255, 255, 0.2)',
                         borderRadius: '10px',
                         padding: '0.75rem',
-                        color: '#888',
+                        color: 'black',
                         cursor: 'pointer',
                         fontFamily: 'inherit',
                         fontSize: '0.875rem',

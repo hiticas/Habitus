@@ -1,19 +1,20 @@
 .navbar {
-  border-bottom: 2px solid #eee;
+  // border-bottom: 2px solid #eee;
   height: 50px;
   padding: 10px;
   display: flex;
   gap: 20px;
   justify-content: flex-end;
+  background: green;
 
   a {
     text-decoration: none;
-    color: #333;
+    color: #fff;
     font-weight: bold;
     font-size: 24px;
 
     &:hover {
-      color: #007BFF;
+      color: rgba(255, 255, 255, 0.824);
     }
   }
 
