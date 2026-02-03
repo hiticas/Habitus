@@ -353,8 +353,8 @@ export default function Dashboard() {
                   className="day-card"
                   style={{
                     background: today 
-                      ? '#008000ad'
-                      : '#cff508',
+                      ? 'rgb(255 255 255)'
+                      : 'rgb(255 255 255 / 81%)',
                     border: today 
                       ? '1px solid rgba(102, 126, 234, 0.3)'
                       : '1px solid rgba(255, 255, 255, 0.08)',
