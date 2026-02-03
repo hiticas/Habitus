@@ -106,7 +106,7 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
       <div style={{
         position: "relative",
         height: "20px",
-        marginLeft: "50px",     // make room for sidebar
+        marginLeft: "30px",     // make room for sidebar
         marginBottom: "10px"
       }}>
         {monthPositions.map(({ month, wi }) => (

@@ -165,15 +165,13 @@ export default function Dashboard() {
     <>
       <Navbar />
       <div style={{
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 50px)',
         background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%)',
         padding: '3rem 2rem',
         fontFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif',
       }}>
         <style>
           {`
-            @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
-            
             @keyframes slideIn {
               from {
                 opacity: 0;

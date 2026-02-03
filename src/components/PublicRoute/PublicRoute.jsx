@@ -11,7 +11,7 @@ export const PublicRoute = ({ children }) => {
 
   // If user is logged in, redirect to home page
   if (user) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   // If user is not logged in, render the component (login/signup)

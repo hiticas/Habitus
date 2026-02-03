@@ -1,13 +1,12 @@
-import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 
-function About() {
+function DesignSystem() {
   return (
     <div>
       <Navbar />
-      <h1>About Page</h1>
+      <h1>Design System Page</h1>
     </div>
   );
 }
 
-export default About;
+export default DesignSystem;

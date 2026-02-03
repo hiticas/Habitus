@@ -8,8 +8,8 @@ import {
 
 import App from './App.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
-import About from './pages/About/About.jsx';
-import Contact from './pages/Contact/Contact.jsx';
+import Profile from './pages/Profile/Profile.jsx';
+import DesignSystem from './pages/DesignSystem/DesignSystem.jsx';
 import Workouts from './pages/Workouts/Workouts.jsx';
 import Habits from './pages/Habits/Habits.jsx';
 
@@ -27,14 +27,14 @@ const router = createBrowserRouter([
     path: '/',
     element: <Navigate to="/login" replace />,
   },
-  {
-    path: '/home',
-    element: (
-      <ProtectedRoute>
-        <App />
-      </ProtectedRoute>
-    ),
-  },
+  // {
+  //   path: '/home',
+  //   element: (
+  //     <ProtectedRoute>
+  //       <App />
+  //     </ProtectedRoute>
+  //   ),
+  // },
   {
     path: '/dashboard',
     element: (
@@ -43,14 +43,14 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  {
-    path: '/workouts',
-    element: (
-      <ProtectedRoute>
-        <Workouts />
-      </ProtectedRoute>
-    ),
-  },
+  // {
+  //   path: '/workouts',
+  //   element: (
+  //     <ProtectedRoute>
+  //       <Workouts />
+  //     </ProtectedRoute>
+  //   ),
+  // },
   {
     path: '/habits',
     element: (
@@ -60,18 +60,18 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/about',
+    path: '/profile',
     element: (
       <ProtectedRoute>
-        <About />
+        <Profile />
       </ProtectedRoute>
     ),
   },
   {
-    path: '/contact',
+    path: '/design-system',
     element: (
       <ProtectedRoute>
-        <Contact />
+        <DesignSystem />
       </ProtectedRoute>
     ),
   },

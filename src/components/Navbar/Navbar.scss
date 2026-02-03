@@ -16,4 +16,15 @@
       color: #007BFF;
     }
   }
+
+  .links-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .links {
+      display: flex;
+      gap: 20px;
+    }
+  }
 }
