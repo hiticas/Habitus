@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Plus, Clock } from 'lucide-react';
 import Navbar from '../../components/Navbar/Navbar';
 import { useHabitsContext } from '../../hooks/useHabitsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import './Dashboard.scss';
 
 export default function Dashboard() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -38,7 +39,8 @@ export default function Dashboard() {
         
       if (response.ok) {
         // setHabits(data);
-        dispatch({ type: 'SET_HABITS', payload: data });
+        const sorted = data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        dispatch({ type: 'SET_HABITS', payload: sorted });
       }
     }
 
@@ -162,185 +164,34 @@ export default function Dashboard() {
 
   return (
 
-    <>
+    <div className="dashboard">
       <Navbar />
-      <div style={{
-        minHeight: 'calc(100vh - 50px)',
-        background: 'linear-gradient(135deg, #00e42a88 0%, #03a00088 100%)',
-        padding: '3rem 2rem',
-        fontFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif',
-      }}>
-        <style>
-          {`
-            @keyframes slideIn {
-              from {
-                opacity: 0;
-                transform: translateY(20px);
-              }
-              to {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
-            
-            @keyframes fadeIn {
-              from { opacity: 0; }
-              to { opacity: 1; }
-            }
-            
-            @keyframes pulse {
-              0%, 100% { transform: scale(1); }
-              50% { transform: scale(1.05); }
-            }
-            
-            .calendar-container {
-              animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            
-            .day-card {
-              animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            
-            .day-card:nth-child(1) { animation-delay: 0.05s; }
-            .day-card:nth-child(2) { animation-delay: 0.1s; }
-            .day-card:nth-child(3) { animation-delay: 0.15s; }
-            .day-card:nth-child(4) { animation-delay: 0.2s; }
-            .day-card:nth-child(5) { animation-delay: 0.25s; }
-            .day-card:nth-child(6) { animation-delay: 0.3s; }
-            .day-card:nth-child(7) { animation-delay: 0.35s; }
-            
-            .day-card:hover {
-              transform: translateY(-4px);
-              border-color: rgba(255, 255, 255, 0.15) !important;
-            }
-            
-            .habit-card {
-              transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            
-            .habit-card:hover {
-              transform: translateX(4px);
-            }
-            
-            .event-card {
-              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            
-            .event-card:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            }
-            
-            .nav-button {
-              transition: all 0.2s ease;
-            }
-            
-            .nav-button:hover {
-              transform: scale(1.1);
-            }
-          `}
-        </style>
-
-        <div className="calendar-container" style={{
-          maxWidth: '1400px',
-          margin: '0 auto',
-        }}>
+      <div className="dashboard-content">
+        <div className="calendar-container">
           {/* Header */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '3rem',
-            flexWrap: 'wrap',
-            gap: '1rem',
-          }}>
-            <div>
-              <h1 style={{
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                fontWeight: '800',
-                color: 'black',
-                margin: '0 0 0.5rem 0',
-                letterSpacing: '-0.02em',
-                lineHeight: '1.1',
-              }}>
-                Habit Tracker
-              </h1>
-              <p style={{
-                fontSize: '1.125rem',
-                color: 'black',
-                margin: 0,
-                fontWeight: '400',
-              }}>
-                {formatMonthYear()}
-              </p>
+          <div className="calendar-header">
+            <div className="header-content">
+              <h1 className="dashboard-title">Habit Tracker</h1>
+              <p className="dashboard-subtitle">{formatMonthYear()}</p>
             </div>
 
-            <div style={{
-              display: 'flex',
-              gap: '0.75rem',
-              alignItems: 'center',
-            }}>
-              <button
-                className="nav-button"
-                onClick={() => navigateWeek(-1)}
-                style={{
-                  background: 'black',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '12px',
-                  padding: '0.75rem',
-                  color: '#fff',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+            <div className="nav-buttons-container">
+              <button className="nav-button" onClick={() => navigateWeek(-1)}>
                 <ChevronLeft size={20} />
               </button>
               
-              <button
-                onClick={() => setCurrentDate(new Date())}
-                style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  border: 'none',
-                  borderRadius: '12px',
-                  padding: '0.75rem 1.5rem',
-                  color: '#fff',
-                  cursor: 'pointer',
-                  fontWeight: '600',
-                  fontSize: '0.95rem',
-                  fontFamily: 'inherit',
-                }}
-              >
+              <button className="nav-today-button" onClick={() => setCurrentDate(new Date())}>
                 Today
               </button>
 
-              <button
-                className="nav-button"
-                onClick={() => navigateWeek(1)}
-                style={{
-                  background: 'black',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '12px',
-                  padding: '0.75rem',
-                  color: '#fff',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <button className="nav-button" onClick={() => navigateWeek(1)}>
                 <ChevronRight size={20} />
               </button>
             </div>
           </div>
 
           {/* Day Cards in Row */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-            gap: '1.5rem',
-          }}>
+          <div className="day-cards-container">
             {daysOfWeek.map((day, dayIndex) => {
               const date = weekDates[dayIndex];
               const dateStr = formatDate(date);
@@ -348,65 +199,16 @@ export default function Dashboard() {
               const dayHabits = habits.filter(habit => habit.date === dateStr);
               
               return (
-                <div
-                  key={`${day}-${dateStr}`}
-                  className="day-card"
-                  style={{
-                    background: today 
-                      ? 'rgb(255 255 255)'
-                      : 'rgb(255 255 255 / 81%)',
-                    border: today 
-                      ? '1px solid rgba(102, 126, 234, 0.3)'
-                      : '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '20px',
-                    overflow: 'hidden',
-                    backdropFilter: 'blur(10px)',
-                    transition: 'all 0.3s ease',
-                    minHeight: '400px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
-                >
+                <div key={`${day}-${dateStr}`} className={`day-card ${today ? 'today' : ''}`}>
                   {/* Card Header */}
-                  <div style={{
-                    padding: '1.5rem',
-                    borderBottom: '1px solid #0000002b',
-                    background: today ? 'rgba(102, 126, 234, 0.05)' : 'rgba(255, 255, 255, 0.02)',
-                  }}>
-                    <div style={{
-                      fontSize: '0.75rem',
-                      fontWeight: '600',
-                      color: 'black',
-                      marginBottom: '0.5rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.1em',
-                    }}>
-                      {day}
-                    </div>
-                    <div style={{
-                      fontSize: '2rem',
-                      fontWeight: '700',
-                      color: 'black',
-                    }}>
-                      {date.getDate()}
-                    </div>
-                    <div style={{
-                      fontSize: '0.875rem',
-                      color: 'black',
-                      marginTop: '0.25rem',
-                    }}>
-                      {date.toLocaleString('default', { month: 'short' })}
-                    </div>
+                  <div className={`day-card-header ${today ? 'today' : ''}`}>
+                    <div className="day">{day}</div>
+                    <div className="date-number">{date.getDate()}</div>
+                    <div className="month-name">{date.toLocaleString('default', { month: 'short' })}</div>
                   </div>
 
                   {/* Habits Container */}
-                  <div style={{
-                    padding: '1rem',
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.75rem',
-                  }}>
+                  <div className="habits-container">
                     {dayHabits.length > 0 ? (
                       dayHabits.map(habit => (
                         <div
@@ -417,30 +219,15 @@ export default function Dashboard() {
                               ? `linear-gradient(135deg, ${habit.color}40 0%, ${habit.color}20 100%)`
                               : 'rgba(255, 255, 255, 0.03)',
                             border: `1px solid ${habit.completed ? habit.color + '60' : 'rgba(255, 255, 255, 0.08)'}`,
-                            borderRadius: '12px',
-                            padding: '1rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.75rem',
-                            transition: 'all 0.2s ease',
-                            position: 'relative',
                           }}
                         >
                           {/* Checkmark Circle */}
                           <div 
+                            className="checkmark-circle"
                             onClick={() => toggleHabit(habit._id || habit.id)}
                             style={{
-                              width: '24px',
-                              height: '24px',
-                              borderRadius: '50%',
                               border: `2px solid ${habit.completed ? habit.color : '#666'}`,
                               background: habit.completed ? habit.color : 'transparent',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              flexShrink: 0,
-                              transition: 'all 0.2s ease',
-                              cursor: 'pointer',
                             }}
                           >
                             {habit.completed && (
@@ -457,51 +244,16 @@ export default function Dashboard() {
                           </div>
                           
                           {/* Habit Title */}
-                          <div 
-                            onClick={() => toggleHabit(habit._id || habit.id)}
-                            style={{
-                              fontSize: '0.875rem',
-                              fontWeight: '600',
-                              color: 'black',
-                              textDecoration: habit.completed ? 'line-through' : 'none',
-                              opacity: habit.completed ? 0.7 : 1,
-                              flex: 1,
-                              cursor: 'pointer',
-                            }}
-                          >
+                          <div className={`habit-title ${habit.completed ? 'completed' : ''}`} onClick={() => toggleHabit(habit._id || habit.id)}>
                             {habit.title}
                           </div>
                           
                           {/* Remove Button */}
                           <button
+                            className="remove-habit-button"
                             onClick={(e) => {
                               e.stopPropagation();
                               removeHabit(habit._id || habit.id);
-                            }}
-                            style={{
-                              background: 'rgba(255, 255, 255, 0.05)',
-                              border: '1px solid rgba(255, 255, 255, 0.1)',
-                              borderRadius: '6px',
-                              width: '24px',
-                              height: '24px',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              cursor: 'pointer',
-                              color: '#888',
-                              fontSize: '0.875rem',
-                              flexShrink: 0,
-                              transition: 'all 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.target.style.background = 'rgba(255, 59, 48, 0.2)';
-                              e.target.style.borderColor = 'rgba(255, 59, 48, 0.4)';
-                              e.target.style.color = '#ff3b30';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.target.style.background = 'rgba(255, 255, 255, 0.05)';
-                              e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                              e.target.style.color = '#888';
                             }}
                           >
                             ×
@@ -509,49 +261,15 @@ export default function Dashboard() {
                         </div>
                       ))
                     ) : (
-                      <div style={{
-                        padding: '2rem 1rem',
-                        textAlign: 'center',
-                        color: 'black',
-                        fontSize: '0.875rem',
-                        fontStyle: 'italic',
-                      }}>
-                        No habits yet
-                      </div>
+                      <div className="no-habits-message">No habits yet</div>
                     )}
                   </div>
 
                   {/* Add Habit Button */}
-                  <div style={{
-                    padding: '1rem',
-                    borderTop: '1px solid #0000002b',
-                  }}>
+                  <div className="add-habit-button-container">
                     <button
+                      className="add-habit-button"
                       onClick={() => openModal(date)}
-                      style={{
-                        width: '100%',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px dashed rgba(255, 255, 255, 0.2)',
-                        borderRadius: '10px',
-                        padding: '0.75rem',
-                        color: 'black',
-                        cursor: 'pointer',
-                        fontFamily: 'inherit',
-                        fontSize: '0.875rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '0.5rem',
-                        transition: 'all 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = 'rgba(255, 255, 255, 0.08)';
-                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'rgba(255, 255, 255, 0.05)';
-                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                      }}
                     >
                       <Plus size={16} />
                       Add Habit
@@ -564,66 +282,13 @@ export default function Dashboard() {
 
           {/* Modal */}
           {showModal && (
-            <div
-              style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'rgba(0, 0, 0, 0.8)',
-                backdropFilter: 'blur(8px)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 1000,
-                padding: '2rem',
-              }}
-              onClick={() => setShowModal(false)}
-            >
-              <div
-                style={{
-                  background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '24px',
-                  padding: '2rem',
-                  maxWidth: '500px',
-                  width: '100%',
-                  maxHeight: '80vh',
-                  overflowY: 'auto',
-                }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '2rem',
-                }}>
-                  <h2 style={{
-                    fontSize: '1.5rem',
-                    fontWeight: '700',
-                    color: '#fff',
-                    margin: 0,
-                  }}>
-                    Add Habit
-                  </h2>
+            <div className="modal-overlay" onClick={() => setShowModal(false)}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                  <h2 className="modal-title">Add Habit</h2>
                   <button
+                    className="close-button"
                     onClick={() => setShowModal(false)}
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '8px',
-                      width: '32px',
-                      height: '32px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      color: '#888',
-                      fontSize: '1.25rem',
-                      transition: 'all 0.2s ease',
-                    }}
                     onMouseEnter={(e) => {
                       e.target.style.background = 'rgba(255, 255, 255, 0.1)';
                     }}
@@ -635,37 +300,20 @@ export default function Dashboard() {
                   </button>
                 </div>
 
-                <div style={{
-                  fontSize: '0.875rem',
-                  color: '#888',
-                  marginBottom: '1.5rem',
+                <div className="modal-description" style={{
                 }}>
                   Select a habit to add for {selectedDay && selectedDay.toLocaleDateString('default', { weekday: 'long', month: 'short', day: 'numeric' })}
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gap: '1rem',
-                }}>
+                <div className="habit-options-container">
                   {availableHabits.map((habit) => (
                     <button
                       key={habit.name}
                       onClick={() => addHabit(habit.name, habit.color, selectedDay)}
+                      className='habit-button'
                       style={{
                         background: `linear-gradient(135deg, ${habit.color}20 0%, ${habit.color}10 100%)`,
                         border: `1px solid ${habit.color}40`,
-                        borderRadius: '12px',
-                        padding: '1rem 1.5rem',
-                        cursor: 'pointer',
-                        fontFamily: 'inherit',
-                        fontSize: '1rem',
-                        fontWeight: '600',
-                        color: '#fff',
-                        textAlign: 'left',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        transition: 'all 0.2s ease',
                       }}
                       onMouseEnter={(e) => {
                         e.target.style.background = `linear-gradient(135deg, ${habit.color}30 0%, ${habit.color}20 100%)`;
@@ -676,10 +324,7 @@ export default function Dashboard() {
                         e.target.style.transform = 'translateX(0)';
                       }}
                     >
-                      <div style={{
-                        width: '12px',
-                        height: '12px',
-                        borderRadius: '3px',
+                      <div className="habit-name" style={{
                         background: habit.color,
                       }}></div>
                       {habit.name}
@@ -691,6 +336,6 @@ export default function Dashboard() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

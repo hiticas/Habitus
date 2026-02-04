@@ -1,0 +1,64 @@
+.year-calendar {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+
+  .year-calendar-title {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .month-labels-container {
+    position: relative;
+    height: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    .month-label {
+      position:absolute;
+      font-size: 11px;
+      color: #666;
+      font-weight: 500;
+    }
+  }
+
+  .sidebar-container {
+    display: flex;
+    gap: 4px;
+    .sidebar-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 14px;
+      .sidebar-day {
+        height: 12px;
+        font-size: 10px;
+        color: #777;
+        margin-bottom: 16px;
+      }
+    }
+
+    .week-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .empty-day {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        background: transparent;
+      }
+
+      .calendar-day {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+    }
+  }
+}

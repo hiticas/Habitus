@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 // import required modules
-import { Pagination } from 'swiper/modules';
+// import { Pagination } from 'swiper/modules';
 
 import './DesignSystem.scss';
 
@@ -17,13 +17,27 @@ function DesignSystem() {
       <Navbar />
       <h1>Design System Page</h1>
       <Swiper
-        slidesPerView={3}
+        breakpoints={{
+          0: {
+            slidesPerView: 1.4,
+          },
+          786: {
+            slidesPerView: 3.8,
+          },
+          1000: {
+            slidesPerView: 5.8,
+          },
+          1400: {
+            slidesPerView: 7,
+          }
+        }}
         spaceBetween={30}
         // centeredSlides={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
+        initialSlide={3} 
+        // pagination={{
+        //   clickable: true,
+        // }}
+        // modules={[Pagination]}
         className="mySwiper"
       >
         <SwiperSlide>Slide 1</SwiperSlide>

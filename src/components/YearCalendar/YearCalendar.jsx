@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
+import './YearCalendar.scss';
 
 const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
-  const [hoveredDay, setHoveredDay] = useState(null);
-
   const generateYearDays = () => {
     const days = [];
     const start = new Date(year, 0, 1);
@@ -91,47 +90,26 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
     });
 
   return (
-    <div style={{
-      padding: "20px",
-      background: "white",
-      borderRadius: "8px",
-      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-      marginTop: "20px"
-    }}>
-      <h4 style={{ marginBottom: "8px", fontWeight: "600", color: habit.color }}>
+    <div className="year-calendar">
+      <h4 className="year-calendar-title" style={{ color: habit.color }}>
         {habit.title}
       </h4>
 
       {/* Month Labels */}
-      <div style={{
-        position: "relative",
-        height: "20px",
-        marginLeft: "30px",     // make room for sidebar
-        marginBottom: "10px"
-      }}>
+      <div className="month-labels-container">
         {monthPositions.map(({ month, wi }) => (
-          <div key={month} style={{
-            position: "absolute",
+          <div className="month-label" key={month} style={{
             left: `${wi * 16}px`,
-            fontSize: "11px",
-            color: "#666",
-            fontWeight: "500"
           }}>
             {monthLabels[month]}
           </div>
         ))}
       </div>
 
-      <div style={{ display: "flex", gap: "4px" }}>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "4px", marginTop: "14px" }}>
+      <div className="sidebar-container">
+        <div className="sidebar-wrapper">
           {sidebarDayIndexes.map((weekday, idx) => (
-            <div key={idx} style={{
-              height: "12px",
-              fontSize: "10px",
-              color: "#777",
-              marginBottom: (weekday === 1 ? "16px" : weekday === 3 ? "16px" : "16px")
-            }}>
+            <div className="sidebar-day" key={idx}>
               {sidebarDays[idx]}
             </div>
           ))}
@@ -139,18 +117,10 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
 
         {/* Calendar grid */}
         {weeks.map((week, wi) => (
-          <div key={wi} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+          <div className="week-container" key={wi}>
             {week.map((day, di) => {
               if (!day) return (
-                <div
-                  key={di}
-                  style={{
-                    width: "12px",
-                    height: "12px",
-                    borderRadius: "2px",
-                    background: "transparent",
-                  }}
-                ></div>
+                <div className="empty-day" key={di}></div>
               );
 
               const dayKey = getDayKey(day);
@@ -170,16 +140,11 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
 
               return (
                 <div
+                  className="calendar-day"
                   key={di}
                   title={formatDate(day)}
                   onClick={() => handleToggle(day)}
-                  onMouseEnter={() => setHoveredDay(day)}
-                  onMouseLeave={() => setHoveredDay(null)}
                   style={{
-                    width: "12px",
-                    height: "12px",
-                    borderRadius: "2px",
-                    cursor: "pointer",
                     background,
                     border,
                     transition: "background 0.15s ease, border 0.15s ease",
@@ -190,19 +155,6 @@ const YearCalendar = ({ year = new Date().getFullYear(), habit }) => {
           </div>
         ))}
       </div>
-      {/* {hoveredDay && (
-        <div style={{
-          marginTop: "10px",
-          padding: "8px",
-          background: "#f2f2f2",
-          borderRadius: "4px",
-          border: "1px solid #ddd",
-          fontSize: "12px",
-          color: "#555"
-        }}>
-          <strong>{formatDate(hoveredDay)}</strong>
-        </div>
-      )} */}
     </div>
   );
 
