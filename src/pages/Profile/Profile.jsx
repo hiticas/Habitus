@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLogout } from '../../hooks/useLogout';
 import { useNavigate } from "react-router-dom";
+import './Profile.scss';
 
 function Profile() {
   const { user } = useAuthContext();
@@ -15,7 +16,7 @@ function Profile() {
   }
 
   return (
-    <div>
+    <div className='profile'>
       <Navbar />
       <h1>Profile Page</h1>
       {user && <p>Welcome, {user.email}!</p>}
