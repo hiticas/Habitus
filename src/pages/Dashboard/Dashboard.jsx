@@ -13,20 +13,6 @@ export default function Dashboard() {
   const { habits, dispatch } = useHabitsContext();
   const { user } = useAuthContext();
   
-  // Habits are now stored by full date string (YYYY-MM-DD) instead of day index
-  // const [habits, setHabits] = useState([]);
-  
-  const availableHabits = [
-    { name: 'Meditate', color: '#667eea' },
-    { name: 'Read', color: '#4ecdc4' },
-    { name: 'Exercise', color: '#ff6b6b' },
-    { name: 'Journal', color: '#f7b731' },
-    { name: 'Drink Water', color: '#45b7d1' },
-    { name: 'Sleep 8hrs', color: '#a29bfe' },
-    { name: 'Eat Healthy', color: '#fd79a8' },
-    { name: 'No Social Media', color: '#fdcb6e' },
-  ];
-
   useEffect(() => {
     const fetchHabits = async () => {
       const response = await fetch('https://habitus-be.vercel.app/api/habits', {
@@ -142,7 +128,7 @@ export default function Dashboard() {
         const newHabit = await response.json();
         dispatch({ type: 'ADD_HABIT', payload: newHabit });
         setShowModal(false);
-        console.log("newHabit", newHabit);
+        // console.log("newHabit", newHabit);
       }
     } catch (error) {
       console.error('Error adding habit:', error);
@@ -315,30 +301,40 @@ export default function Dashboard() {
                 </div>
 
                 <div className="habit-options-container">
-                  {uniqueHabits.map((habit) => (
-                    <button
-                      key={habit.title}
-                      onClick={() => addHabit(habit.title, habit.color, selectedDay)}
-                      className='habit-button'
-                      style={{
-                        background: `linear-gradient(135deg, ${habit.color}20 0%, ${habit.color}10 100%)`,
-                        border: `1px solid ${habit.color}40`,
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = `linear-gradient(135deg, ${habit.color}30 0%, ${habit.color}20 100%)`;
-                        e.target.style.transform = 'translateX(4px)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = `linear-gradient(135deg, ${habit.color}20 0%, ${habit.color}10 100%)`;
-                        e.target.style.transform = 'translateX(0)';
-                      }}
-                    >
-                      <div className="habit-name" style={{
-                        background: habit.color,
-                      }}></div>
-                      {habit.title}
-                    </button>
-                  ))}
+                  {uniqueHabits.length > 0 ? (
+                    uniqueHabits.map((habit) => (
+                      <button
+                        key={habit.title}
+                        onClick={() => addHabit(habit.title, habit.color, selectedDay)}
+                        className="habit-button"
+                        style={{
+                          background: `linear-gradient(135deg, ${habit.color}20 0%, ${habit.color}10 100%)`,
+                          border: `1px solid ${habit.color}40`,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.background = `linear-gradient(135deg, ${habit.color}30 0%, ${habit.color}20 100%)`;
+                          e.target.style.transform = 'translateX(4px)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.background = `linear-gradient(135deg, ${habit.color}20 0%, ${habit.color}10 100%)`;
+                          e.target.style.transform = 'translateX(0)';
+                        }}
+                      >
+                        <div className="habit-name" style={{ background: habit.color }}></div>
+                        {habit.title}
+                      </button>
+                    ))
+                  ) : (
+                    <div className="no-unique-habits">
+                      <p>You haven't created any habits yet.</p>
+                      <button
+                        className="go-to-habits-button"
+                        onClick={() => window.location.href = "/habits"} // or use navigate()
+                      >
+                        Create Habit
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

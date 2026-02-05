@@ -14,6 +14,10 @@ const HabitForm = () => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
+  const [year, setYear] = useState('');
+  const [month, setMonth] = useState('');
+  const [day, setDay] = useState('');
+
   const colors = [
     { color: '#667eea' },
     { color: '#4ecdc4' },
@@ -33,7 +37,9 @@ const HabitForm = () => {
       return;
     }
 
-    const habit = { title, date, color, completed };
+    const finalDate = year && month && day ? `${year}-${month}-${day}` : '';
+
+    const habit = { title, date: finalDate, color, completed };
 
     const response = await fetch('https://habitus-be.vercel.app/api/habits', {
       method: 'POST',
@@ -73,21 +79,64 @@ const HabitForm = () => {
         value={title}
         className={emptyFields?.includes('title') ? 'error' : ''}
       />
-      <br/>
+      <br />
       <label>Date:</label>
-      <br/>
-      <input
-        type="text"
-        onChange={(e) => setDate(e.target.value)}
-        placeholder='2026-02-25'
-        value={date}
-        className={emptyFields?.includes('date') ? 'error' : ''}
-      />
+      <br />
+
+      <div className="date-dropdowns">
+        {/* Year */}
+        <select
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          className={emptyFields?.includes('date') ? 'error' : ''}
+        >
+          <option value="">Year</option>
+          {[...Array(6)].map((_, i) => {
+            const y = 2026 + i; // 2026 - 2031
+            return (
+              <option key={y} value={y}>{y}</option>
+            );
+          })}
+        </select>
+
+        {/* Month */}
+        <select
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
+          className={emptyFields?.includes('date') ? 'error' : ''}
+        >
+          <option value="">Month</option>
+          {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+            <option key={m} value={String(m).padStart(2, '0')}>
+              {m}
+            </option>
+          ))}
+        </select>
+
+        {/* Day */}
+        <select
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+          className={emptyFields?.includes('date') ? 'error' : ''}
+        >
+          <option value="">Day</option>
+          {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+            <option key={d} value={String(d).padStart(2, '0')}>
+              {d}
+            </option>
+          ))}
+        </select>
+      </div>
       <br/><label>Habit Color:</label><br/>
       <select
         value={color}
         onChange={(e) => setColor(e.target.value)}
         className="color-dropdown"
+        style={{
+        backgroundColor: color,       // 🌈 selected color appears here
+        color: "transparent",         // hides default text
+        textShadow: "0 0 0 #0000",    // ensures no text is visible
+      }}
       >
         {colors.map((item) => (
           <option
