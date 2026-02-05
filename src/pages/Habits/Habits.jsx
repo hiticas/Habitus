@@ -109,7 +109,7 @@ function Habits() {
   };
 
   return (
-    <div className="app">
+    <div className="habits-page">
       <Navbar />
       <div className="main">
         <div className="habit-form-wrapper">
