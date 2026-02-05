@@ -14,6 +14,17 @@ const HabitForm = () => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
+  const colors = [
+    { color: '#667eea' },
+    { color: '#4ecdc4' },
+    { color: '#ff6b6b' },
+    { color: '#f7b731' },
+    { color: '#45b7d1' },
+    { color: '#a29bfe' },
+    { color: '#fd79a8' },
+    { color: '#fdcb6e' },
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -68,9 +79,27 @@ const HabitForm = () => {
       <input
         type="text"
         onChange={(e) => setDate(e.target.value)}
+        placeholder='2026-02-25'
         value={date}
         className={emptyFields?.includes('date') ? 'error' : ''}
       />
+      <br/><label>Habit Color:</label><br/>
+      <select
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+        className="color-dropdown"
+      >
+        {colors.map((item) => (
+          <option
+            key={item.color}
+            value={item.color}
+            style={{ backgroundColor: item.color }}
+          >
+            {/* empty text so only color shows */}
+          </option>
+        ))}
+      </select>
+      <br/>
 
       <button>Add Habit</button>
       {error && <div className="error">{error}</div>}

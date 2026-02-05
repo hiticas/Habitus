@@ -49,6 +49,15 @@ export default function Dashboard() {
     }
   }, [user]);
 
+  const uniqueHabits = [
+    ...new Map(
+      habits.map(habit => [`${habit.title}-${habit.color}`, {
+        title: habit.title,
+        color: habit.color
+      }])
+    ).values()
+  ];
+
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   const getWeekDates = (date) => {
@@ -306,10 +315,10 @@ export default function Dashboard() {
                 </div>
 
                 <div className="habit-options-container">
-                  {availableHabits.map((habit) => (
+                  {uniqueHabits.map((habit) => (
                     <button
-                      key={habit.name}
-                      onClick={() => addHabit(habit.name, habit.color, selectedDay)}
+                      key={habit.title}
+                      onClick={() => addHabit(habit.title, habit.color, selectedDay)}
                       className='habit-button'
                       style={{
                         background: `linear-gradient(135deg, ${habit.color}20 0%, ${habit.color}10 100%)`,
@@ -327,7 +336,7 @@ export default function Dashboard() {
                       <div className="habit-name" style={{
                         background: habit.color,
                       }}></div>
-                      {habit.name}
+                      {habit.title}
                     </button>
                   ))}
                 </div>
