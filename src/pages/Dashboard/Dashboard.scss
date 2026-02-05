@@ -58,12 +58,14 @@
           }
         }
       }
-      .day-cards-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 1.5rem;
+      .day-cards-swiper {
+        // display: grid;
+        // grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        // gap: 1.5rem;
 
         .day-card {
+          width: 100%;
+          height: calc(100% - 10px);
           background: rgb(255, 255, 255);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 20px;
@@ -363,4 +365,16 @@
 
 .nav-button:hover {
   transform: scale(1.1);
+}
+
+.day-cards-swiper {
+  width: calc(100% + 64px) !important;
+  margin-left: -32px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+}
+
+.swiper-slide {
+  border-radius: 20px;
+  background: transparent !important;
 }

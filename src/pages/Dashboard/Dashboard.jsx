@@ -5,6 +5,10 @@ import { useHabitsContext } from '../../hooks/useHabitsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import './Dashboard.scss';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 export default function Dashboard() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
@@ -186,94 +190,103 @@ export default function Dashboard() {
           </div>
 
           {/* Day Cards in Row */}
-          <div className="day-cards-container">
+          <Swiper
+            breakpoints={{
+              0: { slidesPerView: 1.2 },
+              575: { slidesPerView: 1.7 },
+              786: { slidesPerView: 2.8 },
+              1024: { slidesPerView: 3.8 },
+              1200: { slidesPerView: 4.8 },
+              1400: { slidesPerView: 7 }
+            }}
+            spaceBetween={32}
+            className="day-cards-swiper"
+          >
             {daysOfWeek.map((day, dayIndex) => {
               const date = weekDates[dayIndex];
               const dateStr = formatDate(date);
               const today = isToday(date);
               const dayHabits = habits.filter(habit => habit.date === dateStr);
-              
+
               return (
-                <div key={`${day}-${dateStr}`} className={`day-card ${today ? 'today' : ''}`}>
-                  {/* Card Header */}
-                  <div className={`day-card-header ${today ? 'today' : ''}`}>
-                    <div className="day">{day}</div>
-                    <div className="date-number">{date.getDate()}</div>
-                    <div className="month-name">{date.toLocaleString('default', { month: 'short' })}</div>
-                  </div>
+                <SwiperSlide key={`${day}-${dateStr}`}>
+                  <div className={`day-card ${today ? 'today' : ''}`}>
+                    {/* Card Header */}
+                    <div className={`day-card-header ${today ? 'today' : ''}`}>
+                      <div className="day">{day}</div>
+                      <div className="date-number">{date.getDate()}</div>
+                      <div className="month-name">{date.toLocaleString('default', { month: 'short' })}</div>
+                    </div>
 
-                  {/* Habits Container */}
-                  <div className="habits-container">
-                    {dayHabits.length > 0 ? (
-                      dayHabits.map(habit => (
-                        <div
-                          key={habit._id || habit.id}
-                          className="habit-card"
-                          style={{
-                            background: habit.completed 
-                              ? `linear-gradient(135deg, ${habit.color}40 0%, ${habit.color}20 100%)`
-                              : 'rgba(255, 255, 255, 0.03)',
-                            border: `1px solid ${habit.completed ? habit.color + '60' : 'rgba(255, 255, 255, 0.08)'}`,
-                          }}
-                        >
-                          {/* Checkmark Circle */}
-                          <div 
-                            className="checkmark-circle"
-                            onClick={() => toggleHabit(habit._id || habit.id)}
+                    {/* Habits Container */}
+                    <div className="habits-container">
+                      {dayHabits.length > 0 ? (
+                        dayHabits.map(habit => (
+                          <div
+                            key={habit._id || habit.id}
+                            className="habit-card"
                             style={{
-                              border: `2px solid ${habit.completed ? habit.color : '#666'}`,
-                              background: habit.completed ? habit.color : 'transparent',
+                              background: habit.completed 
+                                ? `linear-gradient(135deg, ${habit.color}40 0%, ${habit.color}20 100%)`
+                                : 'rgba(255, 255, 255, 0.03)',
+                              border: `1px solid ${habit.completed ? habit.color + '60' : 'rgba(255, 255, 255, 0.08)'}`,
                             }}
                           >
-                            {habit.completed && (
-                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <path 
-                                  d="M2 7L5.5 10.5L12 4" 
-                                  stroke="white" 
-                                  strokeWidth="2" 
-                                  strokeLinecap="round" 
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            )}
-                          </div>
-                          
-                          {/* Habit Title */}
-                          <div className={`habit-title ${habit.completed ? 'completed' : ''}`} onClick={() => toggleHabit(habit._id || habit.id)}>
-                            {habit.title}
-                          </div>
-                          
-                          {/* Remove Button */}
-                          <button
-                            className="remove-habit-button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeHabit(habit._id || habit.id);
-                            }}
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="no-habits-message">No habits yet</div>
-                    )}
-                  </div>
+                            <div 
+                              className="checkmark-circle"
+                              onClick={() => toggleHabit(habit._id || habit.id)}
+                              style={{
+                                border: `2px solid ${habit.completed ? habit.color : '#666'}`,
+                                background: habit.completed ? habit.color : 'transparent',
+                              }}
+                            >
+                              {habit.completed && (
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                  <path 
+                                    d="M2 7L5.5 10.5L12 4" 
+                                    stroke="white" 
+                                    strokeWidth="2" 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              )}
+                            </div>
 
-                  {/* Add Habit Button */}
-                  <div className="add-habit-button-container">
-                    <button
-                      className="add-habit-button"
-                      onClick={() => openModal(date)}
-                    >
-                      <Plus size={16} />
-                      Add Habit
-                    </button>
+                            <div className={`habit-title ${habit.completed ? 'completed' : ''}`} onClick={() => toggleHabit(habit._id || habit.id)}>
+                              {habit.title}
+                            </div>
+
+                            <button
+                              className="remove-habit-button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeHabit(habit._id || habit.id);
+                              }}
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="no-habits-message">No habits yet</div>
+                      )}
+                    </div>
+
+                    <div className="add-habit-button-container">
+                      <button
+                        className="add-habit-button"
+                        onClick={() => openModal(date)}
+                      >
+                        <Plus size={16} />
+                        Add Habit
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </SwiperSlide>
               );
             })}
-          </div>
+          </Swiper>
 
           {/* Modal */}
           {showModal && (

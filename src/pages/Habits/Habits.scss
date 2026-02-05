@@ -2,7 +2,7 @@
   display: flex;
   gap: 2rem;
   padding: 2rem;
-  height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
   background: linear-gradient(135deg, rgba(0, 228, 42, 0.5333333333) 0%, rgba(3, 160, 0, 0.5333333333) 100%);
 
   .habit-details {
