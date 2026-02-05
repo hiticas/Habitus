@@ -112,6 +112,9 @@ function Habits() {
     <div className="app">
       <Navbar />
       <div className="main">
+        <div className="habit-form-wrapper">
+          <HabitForm /> 
+        </div>
         <div className="habit-details">
           {groupedHabits && groupedHabits.map(habit => (
             <div key={habit.title} className="mb-6">
@@ -125,9 +128,6 @@ function Habits() {
               />
             </div>
           ))}
-        </div>
-        <div className="habit-form-wrapper">
-          <HabitForm /> 
         </div>
       </div>
     </div>
