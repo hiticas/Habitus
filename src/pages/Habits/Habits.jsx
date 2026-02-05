@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useHabitsContext } from '../../hooks/useHabitsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -11,6 +11,12 @@ import YearCalendar from '../../components/YearCalendar/YearCalendar';
 function Habits() {
   const { habits, dispatch } = useHabitsContext();
   const { user } = useAuthContext();
+
+  // 👇 YEAR STATE
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  const prevYear = () => setYear((y) => y - 1);
+  const nextYear = () => setYear((y) => y + 1);
 
   useEffect(() => {
     const fetchHabits = async () => {
@@ -112,6 +118,13 @@ function Habits() {
     <div className="habits-page">
       <Navbar />
       <div className="main">
+        {/* YEAR HEADER WITH ARROWS */}
+        <div className="year-header">
+          <button className="year-arrow" onClick={prevYear}>←</button>
+          <h2>{year}</h2>
+          <button className="year-arrow" onClick={nextYear}>→</button>
+        </div>
+
         <div className="habit-form-wrapper">
           <HabitForm /> 
         </div>
@@ -119,6 +132,7 @@ function Habits() {
           {groupedHabits && groupedHabits.map(habit => (
             <div key={habit.title} className="mb-6">
               <YearCalendar 
+                year={year}
                 habit={{
                   title: habit.title,
                   color: habit.color,
