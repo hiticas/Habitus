@@ -20,7 +20,7 @@ function Profile() {
       <Navbar />
       <h1>Profile Page</h1>
       {user && <p>Welcome, {user.email}!</p>}
-      <button onClick={handleClick}>Logout</button>
+      <button className='logout-button' onClick={handleClick}>Logout</button>
     </div>
   );
 }
