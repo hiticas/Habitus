@@ -5,6 +5,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import Navbar from '../../components/Navbar/Navbar'
 import HabitDetails from '../../components/HabitDetails/HabitDetails';
 import HabitForm from '../../components/HabitsForm/HabitsForm';
+import PieChart from '../../components/PieChart/PieChart';
 import './Habits.scss'
 import YearCalendar from '../../components/YearCalendar/YearCalendar';
 
@@ -123,7 +124,10 @@ function Habits() {
         <div className='header'>
           <div className="habit-form-wrapper">
             <HabitForm /> 
-          </div>    
+          </div>
+          <div className="pie-chart-wrapper">
+            <PieChart habits={groupedHabits} />
+          </div>
         </div>
         <div className="habit-details">
           {/* YEAR HEADER WITH ARROWS */}

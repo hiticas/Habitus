@@ -15,8 +15,16 @@
   .header {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     // position: relative;
+    gap: 20px;
+
+    .habit-form-wrapper {
+      width: 50%;
+    }
+    .pie-chart-wrapper {
+      width: 50%;
+    }
   }
 
   .habit-details {
