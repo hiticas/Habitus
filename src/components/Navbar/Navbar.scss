@@ -5,7 +5,7 @@
   display: flex;
   gap: 20px;
   justify-content: flex-end;
-  background: green;
+  background: #0F2421;
 
   a {
     text-decoration: none;
@@ -33,10 +33,11 @@
 .navbar {
   position: relative;
   padding: 1rem;
-  background: #08631c;
+  background: #0F2421;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid gray;
 }
 
 /* Desktop only */
@@ -58,7 +59,8 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background: rgb(8 99 28 / 85%);
+  // background: rgb(8 99 28 / 85%);
+  background: #173632cc;
   width: 100%;
   height: calc(100vh - 50px);
   z-index: 2;
