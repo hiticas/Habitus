@@ -131,6 +131,7 @@ const HabitForm = () => {
         </select>
       </div>
       <br/><label>Habit Color:</label><br/>
+      <br/>
       <select
         value={color}
         onChange={(e) => setColor(e.target.value)}

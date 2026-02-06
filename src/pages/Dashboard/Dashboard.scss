@@ -17,7 +17,7 @@
         .dashboard-title {
           font-size: clamp(2rem, 5vw, 3.5rem);
           font-weight: 800;
-          color: black;
+          color: #77B2AA;
           margin: 0 0 0.5rem 0;
           letter-spacing: -0.02em;
           line-height: 1.1;
@@ -25,7 +25,7 @@
 
         .dashboard-subtitle {  
           font-size: 1.125rem;
-          color: black;
+          color: #77B2AA;
           margin: 0;
           font-weight: 400;
         }
@@ -88,12 +88,21 @@
             background: rgba(255, 255, 255, 0.02);
             &.today {
               background: rgb(166 255 50);
+              .day {
+                color: #173632;
+              }
+              .date-number {
+                color: #173632;
+              }
+              .month-name {
+                color: #173632;
+              }
             }
 
             .day {
               font-size: 0.75rem;
               font-weight: 600;
-              color: black;
+              color: #77B2AA;
               margin-bottom: 0.5rem;
               text-transform: uppercase;
               letter-spacing: 0.1em;
@@ -102,12 +111,12 @@
             .date-number {
               font-size: 2rem;
               font-weight: 700;
-              color: black;
+              color: #77B2AA;
             }
 
             .month-name {
               font-size: 0.875rem;
-              color: black;
+              color: #77B2AA;
               margin-top: 0.25rem;
             }
           }
@@ -182,7 +191,7 @@
         .no-habits-message {
           padding: 2rem 1rem;
           text-align: center;
-          color: black;
+          color: #77B2AA;
           font-size: 0.875rem;
           font-style: italic;
         }
@@ -198,7 +207,7 @@
           border: 1px dashed rgba(255, 255, 255, 0.2);
           border-radius: 10px;
           padding: 0.75rem;
-          color: black;
+          color: #77B2AA;
           cursor: pointer;
           font-family: inherit;
           font-size: 0.875rem;
