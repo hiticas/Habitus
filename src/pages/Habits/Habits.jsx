@@ -118,15 +118,19 @@ function Habits() {
     <div className="habits-page">
       <Navbar />
       <div className="main">
-        {/* YEAR HEADER WITH ARROWS */}
-        <div className="year-header">
-          <button className="year-arrow" onClick={prevYear}>←</button>
-          <h2>{year}</h2>
-          <button className="year-arrow" onClick={nextYear}>→</button>
-        </div>
-
-        <div className="habit-form-wrapper">
-          <HabitForm /> 
+        <div className='header'>
+          <div className="habit-form-wrapper">
+            <HabitForm /> 
+          </div>
+          
+          {/* YEAR HEADER WITH ARROWS */}
+          {groupedHabits.length > 0 && (
+            <div className="year-header">
+              <button className="year-arrow" onClick={prevYear}>←</button>
+              <h2>{year}</h2>
+              <button className="year-arrow" onClick={nextYear}>→</button>
+            </div>
+          )}
         </div>
         <div className="habit-details">
           {groupedHabits && groupedHabits.map(habit => (

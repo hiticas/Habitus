@@ -1,0 +1,33 @@
+.signup-page {
+  height: 100vh;
+  background: linear-gradient(135deg, rgba(0, 228, 42, 0.5333333333) 0%, rgba(3, 160, 0, 0.5333333333) 100%);
+
+  .signup-form {
+    width: 100%;
+    margin: 0 auto;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    max-width: 400px;
+    gap: 10px;
+
+    input {
+      width: 100%;
+      border: 0;
+      font-size: 30px;
+    }
+
+    button {
+      border: 0;
+      background: green;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-top: 20px;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+}

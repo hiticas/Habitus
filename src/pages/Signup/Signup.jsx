@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { useSignup } from '../../hooks/useSignup';
+import './Signup.scss';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const Signup = () => {
   }
 
   return (
-    <div>
+    <div className="signup-page">
       <Navbar />
       <form className='signup-form' onSubmit={handleSubmit}>
         <h3>Sign Up</h3>

@@ -1,4 +1,15 @@
 .profile {
   background: linear-gradient(135deg, rgba(0, 228, 42, 0.5333333333) 0%, rgba(3, 160, 0, 0.5333333333) 100%);
   height: calc(100vh);
+
+  button {
+    border: 0;
+    background: green;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
 }

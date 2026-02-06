@@ -11,14 +11,12 @@ const Navbar = () => {
     <header className="navbar">
 
       {/* Mobile Menu Icon */}
-      {user && (
-        <button 
-          className="mobile-menu-icon" 
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? "✖" : "☰"}
-        </button>
-      )}
+      <button 
+        className="mobile-menu-icon"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? "✖" : "☰"}
+      </button>
 
       {/* Desktop Links */}
       {user && (

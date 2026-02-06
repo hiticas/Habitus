@@ -11,6 +11,12 @@
   padding: 2rem;
   min-height: calc(100vh - 50px);
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
   .habit-details {
     width: 100%;
   }

@@ -378,3 +378,21 @@
   border-radius: 20px;
   background: transparent !important;
 }
+
+.habit-options-container {
+  .no-unique-habits {
+    p {
+      color: white;
+    }
+    .go-to-habits-button {
+      border: 0;
+      background: green;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-top: 20px;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+}

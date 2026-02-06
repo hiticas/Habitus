@@ -70,8 +70,9 @@ const HabitForm = () => {
   return (
     <form className="habit-form" onSubmit={handleSubmit}>
       <h3>Add a New Habit</h3>
-
+      <br/>
       <label>Habit Title:</label>
+      <br/>
       <br/>
       <input
         type="text"
@@ -80,7 +81,9 @@ const HabitForm = () => {
         className={emptyFields?.includes('title') ? 'error' : ''}
       />
       <br />
+      <br />
       <label>Date:</label>
+      <br />
       <br />
 
       <div className="date-dropdowns">
