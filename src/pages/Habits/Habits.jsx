@@ -123,8 +123,9 @@ function Habits() {
         <div className='header'>
           <div className="habit-form-wrapper">
             <HabitForm /> 
-          </div>
-          
+          </div>    
+        </div>
+        <div className="habit-details">
           {/* YEAR HEADER WITH ARROWS */}
           {groupedHabits.length > 0 && (
             <div className="year-header">
@@ -133,8 +134,6 @@ function Habits() {
               <button className="year-arrow" onClick={nextYear}>→</button>
             </div>
           )}
-        </div>
-        <div className="habit-details">
           {groupedHabits && groupedHabits.map(habit => (
             <div key={habit.title} className="mb-6">
               <YearCalendar 

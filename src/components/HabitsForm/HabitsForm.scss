@@ -1,4 +1,11 @@
 .habit-form {
+  background: #173632;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  // align-items: end;
   input {
     border: 0;
     font-size: 20px;
