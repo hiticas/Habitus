@@ -228,8 +228,8 @@ export default function Dashboard() {
                             style={{
                               background: habit.completed 
                                 ? `linear-gradient(135deg, ${habit.color}40 0%, ${habit.color}20 100%)`
-                                : 'rgba(255, 255, 255, 0.03)',
-                              border: `1px solid ${habit.completed ? habit.color + '60' : 'rgba(255, 255, 255, 0.08)'}`,
+                                : `linear-gradient(135deg, ${habit.color}40 0%, ${habit.color}20 100%)`,
+                              border: `1px solid ${habit.completed ? habit.color + '60' : habit.color + '60'}`,
                             }}
                           >
                             <div 
@@ -269,7 +269,7 @@ export default function Dashboard() {
                           </div>
                         ))
                       ) : (
-                        <div className="no-habits-message">No habits yet</div>
+                        <div className="no-habits-message">No habits set</div>
                       )}
                     </div>
 

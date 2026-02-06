@@ -18,30 +18,6 @@
   }
 }
 
-.year-header {
-  position: absolute;
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 20px;
-  margin-top: 20px;
-
-  .year-arrow {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
-    padding: 5px 10px;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: #000;
-    }
-  }
-}
-
 .color-dropdown option {
   height: 20px;
   padding: 5px;
