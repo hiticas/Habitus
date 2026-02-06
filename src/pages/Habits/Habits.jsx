@@ -58,6 +58,8 @@ function Habits() {
     : [];
 
   groupedHabits.sort((a, b) => a.title.localeCompare(b.title));
+  console.log(groupedHabits, "groupedHabits");
+  
 
   const toggleHabitDate = async (date, existingRecord, habit) => {
     try {
