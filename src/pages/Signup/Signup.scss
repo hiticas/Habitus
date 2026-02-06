@@ -1,6 +1,7 @@
 .signup-page {
   height: 100vh;
-  background: linear-gradient(135deg, rgba(0, 228, 42, 0.5333333333) 0%, rgba(3, 160, 0, 0.5333333333) 100%);
+  // background: linear-gradient(135deg, rgba(0, 228, 42, 0.5333333333) 0%, rgba(3, 160, 0, 0.5333333333) 100%);
+  background: #0F2421;
 
   .signup-form {
     width: 100%;
@@ -28,6 +29,13 @@
       color: white;
       font-size: 20px;
       cursor: pointer;
+    }
+
+    label {
+      color: #77B2AA;
+    }
+    h3 {
+      color: #77B2AA;
     }
   }
 }
