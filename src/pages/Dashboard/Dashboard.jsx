@@ -227,8 +227,8 @@ export default function Dashboard() {
                             className="habit-card"
                             style={{
                               background: habit.completed 
-                                ? `linear-gradient(135deg, ${habit.color}CC 0%, ${habit.color}88 100%)`
-                                : `linear-gradient(135deg, ${habit.color}CC 0%, ${habit.color}88 100%)`,
+                                ? `linear-gradient(135deg, ${habit.color}CC 0%, ${habit.color}66 100%)`
+                                : `linear-gradient(135deg, ${habit.color}CC 0%, ${habit.color}66 100%)`,
                               border: `1px solid ${habit.completed ? habit.color + '60' : habit.color + '60'}`,
                             }}
                           >
